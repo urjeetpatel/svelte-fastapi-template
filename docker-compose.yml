@@ -1,0 +1,11 @@
+version: "3.3"
+
+services: 
+    frontend:
+        build: ./frontend
+        ports: 
+            - 5000:5000
+            - 35729:35729
+        volumes: 
+            - /home/urjeet/projects/tailwind-python-template/frontend/app:/home/node/app
+        user: node
