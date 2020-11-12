@@ -9,3 +9,11 @@ services:
         volumes: 
             - /home/urjeet/projects/tailwind-python-template/frontend/app:/home/node/app
         user: node
+    
+    backend:
+        build: ./backend
+        ports: 
+            - 5001:80
+        volumes: 
+            - /home/urjeet/projects/tailwind-python-template/backend/app:/app/
+        command: "/start-reload.sh" # this is for dev only change for prod to /start.sh
