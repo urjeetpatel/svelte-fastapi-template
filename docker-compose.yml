@@ -2,14 +2,23 @@ version: "3.3"
 
 services: 
   db:
-    image: postgres:13
-    volumes:
-      - app-db-data:/var/lib/postgresql/data/pgdata
+    image: postgres:12
     env_file:
       - .env
     environment:
       - PGDATA=/var/lib/postgresql/data/pgdata
 
+  pgadmin:
+    image: dpage/pgadmin4
+    depends_on:
+      - db
+    env_file:
+      - .env
+    links:
+      - "db:pgsql-server"
+    ports: 
+      - 5050:80
+      - 5051:443
 
   frontend:
     build: ./frontend
@@ -28,10 +37,6 @@ services:
       dockerfile: Dockerfile
       args:
         INSTALL_DEV: ${INSTALL_DEV-false}
-    
     ports: 
       - 5001:80
     command: /start.sh
-
-volumes:
-  app-db-data:

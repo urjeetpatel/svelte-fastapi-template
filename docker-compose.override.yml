@@ -3,7 +3,7 @@ services:
   db:
     volumes:
       - ./database_data:/var/lib/postgresql/data/pgdata
-
+    user: 1000:1000
   backend:
     volumes:
       - ./backend/app:/app
