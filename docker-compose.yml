@@ -6,14 +6,14 @@ services:
         ports: 
             - 5000:5000
             - 35729:35729
-        #volumes: 
-        #    - {$PWD}/frontend/app:/home/node/app
+        volumes: 
+            - ./frontend/app:/home/node/app
         user: node
     
     backend:
         build: ./backend
         ports: 
             - 5001:80
-        #volumes: 
-            - {$PWD}:/app/
+        volumes: 
+            - ./backend/app:/app/
         command: "/start-reload.sh" # this is for dev only change for prod to /start.sh
