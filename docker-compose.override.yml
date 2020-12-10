@@ -1,12 +1,15 @@
 version: "3.3"
 services:
+  db:
+    volumes:
+      - ./database_data:/var/lib/postgresql/data/pgdata
 
   backend:
     volumes:
       - ./backend/app:/app
     environment:
       - JUPYTER=jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.custom_display_url=http://127.0.0.1:8888
-    command: ./start-reload.sh
+    command: /start-reload.sh
     build:
       args:
         INSTALL_DEV: ${INSTALL_DEV-true}
@@ -14,3 +17,5 @@ services:
   frontend:
     volumes: 
       - ./frontend/app:/home/node/app
+
+    
