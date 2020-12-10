@@ -1,0 +1,29 @@
+services:
+  backend:
+    build:
+      args:
+        INSTALL_DEV: "true"
+        INSTALL_JUPYTER: "true"
+      context: /home/urjeet/projects/tailwind-python-template/backend
+      dockerfile: Dockerfile
+    command: ./start-reload.sh
+    environment:
+      JUPYTER: jupyter lab --ip=0.0.0.0 --allow-root --NotebookApp.custom_display_url=http://127.0.0.1:8888
+    ports:
+    - published: 5001
+      target: 80
+    volumes:
+    - /home/urjeet/projects/tailwind-python-template/backend/app:/app:rw
+  frontend:
+    build:
+      context: /home/urjeet/projects/tailwind-python-template/frontend
+    ports:
+    - published: 5000
+      target: 5000
+    - published: 35729
+      target: 35729
+    user: node
+    volumes:
+    - /home/urjeet/projects/tailwind-python-template/frontend/app:/home/node/app:rw
+version: '3.3'
+
