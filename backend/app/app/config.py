@@ -8,6 +8,8 @@ class Settings(BaseSettings):
     POSTGRES_USER: str
     POSTGRES_PASSWORD: str
     POSTGRES_DB: str
+    JWT_SECRET: str = "SECRET"
+    JWT_LIFETIME: int = 3600
 
     SQLALCHEMY_DATABASE_URI: Optional[PostgresDsn] = None
 
