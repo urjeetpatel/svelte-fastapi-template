@@ -12,7 +12,11 @@ class User(Base):
     username = Column(String, unique=True, index=True)
     hashed_password = Column(String)
     is_active = Column(Boolean, default=True)
-    roles = relationship("Role", back_populates="users")
+    role_id = Column(Integer, ForeignKey("roles.id"))
+    roles = relationship(
+        "Role",
+        back_populates="users",
+    )
 
 
 class Role(Base):

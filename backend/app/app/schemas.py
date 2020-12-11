@@ -1,6 +1,14 @@
 from pydantic import BaseModel
 
 
+class Role(BaseModel):
+    id: int
+    title: str
+
+    class Config:
+        orm_mode = True
+
+
 class UserBase(BaseModel):
     username: str
 
